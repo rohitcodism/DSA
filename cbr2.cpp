@@ -7,6 +7,10 @@ void swap(int* a, int* b){
     *b = temp;
 }
 
+void swapRefVar(){
+    
+}
+
 int main(){
     int x,y;
     cout<<"Enter any two no.s : ";
