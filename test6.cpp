@@ -1,5 +1,6 @@
-#include <stdio.h>
+#include <iostream>
 #include <stdlib.h>
+using namespace std;
 int isDigit(char ch)
 {
     if (ch >= '0' && ch <= '9')
