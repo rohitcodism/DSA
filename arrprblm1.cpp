@@ -73,17 +73,16 @@ class Arrayprb{
         void missing3(){
             int x = max();
             int z = min();
+
             int marker = 0;
             int b[x+1] = {0};
+
             for(int i = 0;i<length;i++){
-                if(!b[i]){
-                    cout<<"Array a elements : "<<a[i]<<endl;
+                if(!b[a[i]]){
                     b[a[i]]++;
                 }
             }
-            for(int i = 0;i<x+1;i++){
-                cout<<i<<" : "<<b[i]<<", "<<endl;
-            }
+            
             for(int i = z; i<x+1; i++){
                 if(!b[i]){
                     cout<<"The missing element is : "<<i<<endl;
