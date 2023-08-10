@@ -19,6 +19,26 @@ class Arrayprb{
             }
         }
 
+        int max(){
+            int max1 = a[0];
+            for(int i = 1;i<length;i++){
+                if(a[i]>max1){
+                    max1 = a[i];
+                }
+            }
+            return max1;
+        }
+
+        int min(){
+            int min1 = a[0];
+            for(int i = 1;i<length;i++){
+                if(a[i]<min1){
+                    min1 = a[i];
+                }
+            }
+            return min1;
+        }
+
         int findMissing()
         {
             int fElm = a[0];
@@ -49,6 +69,32 @@ class Arrayprb{
                     cout<<"There is no missing elements in the array."<<endl;
             }
         }
+
+        void missing3(){
+            int x = max();
+            int z = min();
+            int marker = 0;
+            int b[x+1] = {0};
+            for(int i = 0;i<length;i++){
+                if(!b[i]){
+                    cout<<"Array a elements : "<<a[i]<<endl;
+                    b[a[i]]++;
+                }
+            }
+            for(int i = 0;i<x+1;i++){
+                cout<<i<<" : "<<b[i]<<", "<<endl;
+            }
+            for(int i = z; i<x+1; i++){
+                if(!b[i]){
+                    cout<<"The missing element is : "<<i<<endl;
+                    marker++;
+                }
+            }
+            if(!marker){
+                cout<<"No missing values in the array.";
+            }
+
+        }
 };
 
 int main(){
@@ -66,6 +112,9 @@ int main(){
 
     // cout<<"The missing element is : "<<a1.findMissing()<<endl;
     
-    a1.missing2();
+    // a1.missing2();
+
+    a1.missing3();
+
     return 0;
 }
