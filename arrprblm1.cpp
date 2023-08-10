@@ -1,26 +1,68 @@
 #include<iostream>
 using namespace std;
 
-int findMissing(int a[], int n){
-    int fElm = a[0];
-    int lElm = a[n-1];
-    int sumAll = (lElm*(lElm + 1))/2;
-    int reSum = 0;
-    for(int i = 0;i<n;i++){
-        reSum += a[i];
-    }
-    int missElm = sumAll-reSum;
-    return missElm;
-}
+class Arrayprb{
+    private:
+        int a[100];
+        int length;
+        int size;
+    public:
+        Arrayprb(int n){
+            size = 100;
+            length = n;
+        }
+
+        void getData(){
+            int i;
+            for(i = 0;i<length;i++){
+                cin>>a[i];
+            }
+        }
+
+        int findMissing()
+        {
+            int fElm = a[0];
+            int lElm = a[length - 1];
+            int sumAll = (lElm * (lElm + 1)) / 2;
+            int reSum = 0;
+            for (int i = 0; i < length; i++)
+            {
+                reSum += a[i];
+            }
+            int missElm = sumAll - reSum;
+            return missElm;
+        }
+
+        void missing2(){
+            int fElm = a[0];
+            int i, flag;
+            for(i = 0;i<length;i++){
+                if((a[i]-i)!=fElm){
+                    cout<<"The missing element is : "<<(fElm+i)<<endl;
+                    flag++;
+                    break;
+                }
+                if(!flag)
+                    cout<<"There is no missing elements in the array."<<endl;
+            }
+        }
+};
 
 int main(){
-    int a[100], n;
+    int n, x;
+
     cout<<"Enter the length of the array : ";
     cin>>n;
-    cout<<"Enter all the elements of the array : "<<endl;
-    for(int i = 0;i<n;i++){
-        cin>>a[i];
-    }
-    cout<<"The missing element is : "<<findMissing(a, n)<<endl;
+
+    // cout<<"Enter the option you want to perform : "<<endl;
+
+    Arrayprb a1(n);
+
+    cout<<"Enter all the elements : ";
+    a1.getData();
+
+    // cout<<"The missing element is : "<<a1.findMissing()<<endl;
+    
+    a1.missing2();
     return 0;
 }
