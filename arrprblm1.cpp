@@ -35,12 +35,15 @@ class Arrayprb{
 
         void missing2(){
             int fElm = a[0];
+            int diff = fElm;
             int i, flag;
             for(i = 0;i<length;i++){
-                if((a[i]-i)!=fElm){
-                    cout<<"The missing element is : "<<(fElm+i)<<endl;
-                    flag++;
-                    break;
+                if((a[i]-i)!=diff){
+                    while(diff<(a[i]-i)){
+                        cout<<"The missing element is : "<<(diff+i)<<endl;
+                        diff++;
+                        flag++;
+                    }
                 }
                 if(!flag)
                     cout<<"There is no missing elements in the array."<<endl;
