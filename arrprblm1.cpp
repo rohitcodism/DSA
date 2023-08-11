@@ -99,12 +99,15 @@ class Arrayprb{
             int copy = 0;
             int flag = 0;
             for(int i =0;i<length;i++){
+                flag = 0;
                 if(a[i] == a[i+1] && a[i] != copy){
                     cout<<"Duplicate element is : "<<a[i]<<endl;
                     copy = a[i];
-                }else{
-                    
+                }else if(a[i] == copy){
+                    flag++;
                 }
+                if(flag)
+                    cout<<a[i]<<"is duplicated : "<<flag<<"times."<<endl;;
             }
         }
 };
