@@ -98,16 +98,20 @@ class Arrayprb{
         void duplicate(){
             int copy = 0;
             int flag = 0;
+            int j;
             for(int i =0;i<length;i++){
                 flag = 0;
-                if(a[i] == a[i+1] && a[i] != copy){
-                    cout<<"Duplicate element is : "<<a[i]<<endl;
-                    copy = a[i];
-                }else if(a[i] == copy){
-                    flag++;
+                if(a[i] == a[i+1]){
+                    j = i+1;
+                    while (a[j] == a[i])
+                    {
+                        /* code */
+                        j++;
+                    }
+                    cout<<a[i]<<" is appearing "<<j-i<<" times."<<endl;
+                    i = j-1;
+                    
                 }
-                if(flag)
-                    cout<<a[i]<<"is duplicated : "<<flag<<"times."<<endl;;
             }
         }
 };
