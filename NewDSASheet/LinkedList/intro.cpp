@@ -26,7 +26,10 @@ void Create(int a[], int n){
 
 void display(Node *p){
     while(p != NULL){
-        cout<<p->data<<" -> "<<endl;
+        if(p->next!=NULL)
+            cout<<p->data<<" -> ";
+        else
+            cout<<p->data;
         p = p->next;
     }
 }
