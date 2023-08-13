@@ -32,11 +32,24 @@ void display(Node *p){
 }
 
 int Count(Node *p){
-    if(p == NULL){
-        return 0;
-    }else{
+    if(p)
         return Count(p->next)+1;
+    return 0;
+}
+
+int SumOfElements(Node *p){
+    if(p)
+        return SumOfElements(p->next)+p->data;
+    return 0;
+}
+
+int Max(Node *p){
+    int max = -32768;
+    if(p->data>max){
+        max = p->data;
+        p = p->next;
     }
+    return max;
 }
 
 
@@ -44,6 +57,7 @@ int main(){
     int A[] = {1,2,3,4,5,6,7};
     Create(A, 7);
     // display(first);
-    cout<<"The number of nodes in the linked list is : "<<Count(first)<<endl;
+    // cout<<"The number of nodes in the linked list is : "<<Count(first)<<endl;
+    cout<<"The sum of elements in the linked list is : "<<SumOfElements(first)<<endl;
     return 0;
 }
