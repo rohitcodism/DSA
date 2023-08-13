@@ -26,9 +26,17 @@ void Create(int a[], int n){
 
 void display(Node *p){
     if(p != NULL){
-        display(p->next);
         cout<<p->data<<" ";
+        display(p->next);
     }
+}
+
+void Count(Node *p){
+    int count;
+    while(p->next != NULL){
+        count++;
+    }
+    cout<<"The number of nodes in the linked list is : "<<count<<endl;
 }
 
 
@@ -36,5 +44,6 @@ int main(){
     int A[5] = {1,2,3,4,5};
     Create(A, 5);
     display(first);
+    Count(first);
     return 0;
 }
