@@ -53,6 +53,15 @@ int Max(Node *p){
     }
 }
 
+int search(Node *p, int key){
+    while(p){
+        if(p->data == key)
+            return p->data;
+        p = p->next;
+    }
+    return -1;
+}
+
 
 int main(){
     int A[] = {1,2,3,4,5,6,7};
@@ -60,6 +69,7 @@ int main(){
     // display(first);
     // cout<<"The number of nodes in the linked list is : "<<Count(first)<<endl;
     // cout<<"The sum of elements in the linked list is : "<<SumOfElements(first)<<endl;
-    cout<<"The Maximum element in the linked list is : "<<Max(first)<<endl;
+    // cout<<"The Maximum element in the linked list is : "<<Max(first)<<endl;
+    cout<<search(first, 9)<<endl;
     return 0;
 }
