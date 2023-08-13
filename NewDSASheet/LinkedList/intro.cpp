@@ -32,18 +32,18 @@ void display(Node *p){
 }
 
 void Count(Node *p){
-    int count;
-    while(p->next != NULL){
-        count++;
+    int count = 0;
+    if(p != NULL){
+        return Count(p->next)+1
     }
     cout<<"The number of nodes in the linked list is : "<<count<<endl;
 }
 
 
 int main(){
-    int A[5] = {1,2,3,4,5};
-    Create(A, 5);
-    display(first);
+    int A[] = {1,2,3,4,5,6,7};
+    Create(A, 7);
+    // display(first);
     Count(first);
     return 0;
 }
