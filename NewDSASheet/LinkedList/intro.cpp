@@ -44,12 +44,13 @@ int SumOfElements(Node *p){
 }
 
 int Max(Node *p){
-    int max = -32768;
-    if(p->data>max){
-        max = p->data;
-        p = p->next;
+    int m = -32768;
+    if(!p)
+        return m;
+    else{
+        int x = Max(p->next);
+        return x>p->data ? x : p->data;
     }
-    return max;
 }
 
 
