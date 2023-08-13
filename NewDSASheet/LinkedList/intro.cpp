@@ -4,14 +4,37 @@ using namespace std;
 class Node{
     public:
         int data;
-        class Node *next;
-};
+        Node *next;
+}*first;
+
+void Create(int a[], int n){
+    int i;
+    Node *t, *last;
+    first = new Node;
+    first->data = a[0];
+    first->next = NULL;
+    last=first;
+
+    for(i = 1;i<n;i++){
+        t = new Node;
+        t->data = a[i];
+        t->next = NULL;
+        last->next = t;
+        last = t;
+    }
+}
+
+void display(Node *p){
+    while(p != NULL){
+        cout<<p->data<<" -> "<<endl;
+        p = p->next;
+    }
+}
+
 
 int main(){
-    Node *p;
-    p = new Node;
-    p->data = 10;
-    p->next = 0;
-    cout<<p->data<<endl;
-    cout<<p->next<<endl;
+    int A[5] = {1,2,3,4,5};
+    Create(A, 5);
+    display(first);
+    return 0;
 }
