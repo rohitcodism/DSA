@@ -59,6 +59,7 @@ int main(){
     Create(A, 7);
     // display(first);
     // cout<<"The number of nodes in the linked list is : "<<Count(first)<<endl;
-    cout<<"The sum of elements in the linked list is : "<<SumOfElements(first)<<endl;
+    // cout<<"The sum of elements in the linked list is : "<<SumOfElements(first)<<endl;
+    cout<<"The Maximum element in the linked list is : "<<Max(first)<<endl;
     return 0;
 }
