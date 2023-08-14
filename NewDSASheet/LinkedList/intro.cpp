@@ -78,11 +78,23 @@ Node* MTH(Node* p, int key){
     return NULL;
 }
 
-void insertFirst(int key){
-    Node *t;
-    t->data = key;
-    t->next = first;
-    first = t;
+void insertFirst(int key, int pos){
+    if(pos<=Count(first)){
+        Node *t;
+        Node *p = first;
+        if(pos == 0){
+            t->data = key;
+            t->next = first;
+            first = t;
+        }else{
+            for(int i  = 0;i<pos;i++){
+                p = p->next;
+            }
+            t->data = key;
+            t->next = p->next;
+            p->next = t;
+        }
+    }
 }
 
 int main(){
@@ -99,10 +111,12 @@ int main(){
     else
         cout<<"Key wasn't found."<<endl;
 
-    int k;
-    cout<<"Enter a key to insert : "<<endl;
+    int k, pos;
+    cout<<"Enter a key to insert : ";
     cin>>k;
-    insertFirst(k);
+    cout<<"Enter the position you want to insert : ";
+    cin>>pos;
+    insertFirst(k, pos);
     display(first);
     return 0;
 }
