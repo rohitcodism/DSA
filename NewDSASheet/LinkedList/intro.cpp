@@ -64,17 +64,18 @@ Node* search(Node *p, int key){
 }
 
 Node* MTH(Node* p, int key){
-    Node* q = NULL;
+    Node *q = NULL;
     while(p){
-        if(key = p->data){
-        q->next = p->next;
-        p->next = first;
-        first = p;
-        return p;
+        if(key == p->data){
+            q->next = p->next;
+            p->next = first;
+            first = p;
+            return p;
         }
+        q = p;
+        p = p->next;
     }
-    q = p;
-    p = p->next;
+    return NULL;
 }
 
 
