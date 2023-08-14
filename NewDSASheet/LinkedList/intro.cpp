@@ -63,6 +63,17 @@ Node* search(Node *p, int key){
     }
 }
 
+Node* MTHSearch(Node* p, int key){
+    Node* q = NULL;
+    while(p){
+        q->next = p->next;
+        p->next = first;
+        first = p;
+    }
+    q = p;
+    p = p->next;
+}
+
 
 int main(){
     int A[] = {1,2,3,4,5,6,7};
