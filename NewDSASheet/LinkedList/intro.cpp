@@ -95,6 +95,7 @@ void insertFirst(int key, int pos){
             p->next = t;
         }
     }
+    display(first);
 }
 
 int main(){
@@ -117,6 +118,5 @@ int main(){
     cout<<"Enter the position you want to insert : ";
     cin>>pos;
     insertFirst(k, pos);
-    display(first);
     return 0;
 }
