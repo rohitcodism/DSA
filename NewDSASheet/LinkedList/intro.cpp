@@ -63,12 +63,15 @@ Node* search(Node *p, int key){
     }
 }
 
-Node* MTHSearch(Node* p, int key){
+Node* MTH(Node* p, int key){
     Node* q = NULL;
     while(p){
+        if(key = p->data){
         q->next = p->next;
         p->next = first;
         first = p;
+        return p;
+        }
     }
     q = p;
     p = p->next;
@@ -82,6 +85,11 @@ int main(){
     // cout<<"The number of nodes in the linked list is : "<<Count(first)<<endl;
     // cout<<"The sum of elements in the linked list is : "<<SumOfElements(first)<<endl;
     // cout<<"The Maximum element in the linked list is : "<<Max(first)<<endl;
-    cout<<search(first, 4)<<endl;
+    // cout<<search(first, 3)<<endl;
+    Node *src = MTH(first, 3);
+    if(src)
+        cout<<"Key was found : "<<src->data<<endl;
+    else
+        cout<<"Key wasn't found."<<endl;
     return 0;
 }
