@@ -83,13 +83,15 @@ void insertFirst(int key, int pos){
         Node *t;
         Node *p = first;
         if(pos == 0){
+            t = new Node;
             t->data = key;
             t->next = first;
             first = t;
         }else{
-            for(int i  = 0;i<pos;i++){
+            for(int i  = 0;i<pos-1;i++){
                 p = p->next;
             }
+            t = new Node;
             t->data = key;
             t->next = p->next;
             p->next = t;
@@ -106,11 +108,11 @@ int main(){
     // cout<<"The sum of elements in the linked list is : "<<SumOfElements(first)<<endl;
     // cout<<"The Maximum element in the linked list is : "<<Max(first)<<endl;
     // cout<<search(first, 3)<<endl;
-    Node *src = MTH(first, 3);
-    if(src)
-        cout<<"Key was found : "<<src->data<<endl;
-    else
-        cout<<"Key wasn't found."<<endl;
+    // Node *src = MTH(first, 3);
+    // if(src)
+    //     cout<<"Key was found : "<<src->data<<endl;
+    // else
+    //     cout<<"Key wasn't found."<<endl;
 
     int k, pos;
     cout<<"Enter a key to insert : ";
