@@ -53,13 +53,14 @@ int Max(Node *p){
     }
 }
 
-int search(Node *p, int key){
-    while(p){
-        if(p->data == key)
-            return p->data;
-        p = p->next;
+Node* search(Node *p, int key){
+    if(p == NULL)
+        return NULL;
+    else{
+        if(key == p->data)
+            return (p);
+        search(p->next, key); 
     }
-    return -1;
 }
 
 
@@ -70,6 +71,6 @@ int main(){
     // cout<<"The number of nodes in the linked list is : "<<Count(first)<<endl;
     // cout<<"The sum of elements in the linked list is : "<<SumOfElements(first)<<endl;
     // cout<<"The Maximum element in the linked list is : "<<Max(first)<<endl;
-    cout<<search(first, 9)<<endl;
+    cout<<search(first, 4)<<endl;
     return 0;
 }
