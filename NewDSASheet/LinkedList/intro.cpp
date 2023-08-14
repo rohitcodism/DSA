@@ -78,6 +78,12 @@ Node* MTH(Node* p, int key){
     return NULL;
 }
 
+void insertFirst(int key){
+    Node *t;
+    t->data = key;
+    t->next = first;
+    first = t;
+}
 
 int main(){
     int A[] = {1,2,3,4,5,6,7};
@@ -92,5 +98,11 @@ int main(){
         cout<<"Key was found : "<<src->data<<endl;
     else
         cout<<"Key wasn't found."<<endl;
+
+    int k;
+    cout<<"Enter a key to insert : "<<endl;
+    cin>>k;
+    insertFirst(k);
+    display(first);
     return 0;
 }
