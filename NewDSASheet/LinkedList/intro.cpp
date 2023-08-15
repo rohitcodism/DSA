@@ -133,6 +133,24 @@ void Reverse1(Node *p){
     display(first);
 }
 
+// Sliding pointer method Reverse
+
+void Reverse2(Node *p){
+    Node *q, *r, *s;
+    q = p;
+    r = NULL;
+    s = NULL;
+    while(q){
+        s = r;
+        r = q;
+        q = q->next;
+        r->next = s;
+    }
+    first = r;
+    display(first);
+
+}
+
 int main(){
     int A[] = {2,4,6,8};
     Create(A, 4);
@@ -160,7 +178,7 @@ int main(){
     // reDup(first);
 
     cout<<"After Reversing : "<<endl;
-    Reverse1(first);
+    Reverse2(first);
 
     return 0;
 }
