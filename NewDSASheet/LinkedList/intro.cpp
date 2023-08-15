@@ -117,13 +117,25 @@ void reDup(Node *p){
     display(first);
 }
 
-void Reverse(Node *p){
-    
+void Reverse1(Node *p){
+    int A[4];
+    int i;
+    Node *q = p;
+    for(i = 0;i<4 && q;i++){
+        A[i] = q->data;
+        q = q->next;
+    }
+    q = first;
+    for(i = i-1;i>=0;i--){
+        q->data = A[i];
+        q = q->next;
+    }
+    display(first);
 }
 
 int main(){
-    int A[] = {3, 5, 8, 8, 10, 10, 10, 12};
-    Create(A, 8);
+    int A[] = {2,4,6,8};
+    Create(A, 4);
     cout<<"Before removing dup : "<<endl;
     display(first);
     // display(first);
@@ -144,8 +156,11 @@ int main(){
     // cin>>pos;
     // insertFirst(k, pos);
 
-    cout<<"After removing : "<<endl;
-    reDup(first);
+    // cout<<"After removing : "<<endl;
+    // reDup(first);
+
+    cout<<"After Reversing : "<<endl;
+    Reverse1(first);
 
     return 0;
 }
