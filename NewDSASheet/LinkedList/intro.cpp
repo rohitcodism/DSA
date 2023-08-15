@@ -100,9 +100,28 @@ void insertFirst(int key, int pos){
     display(first);
 }
 
+void reDup(Node *p){
+    Node *q = NULL;
+    while(p){
+        if(p->data != q->data){
+            q = p;
+            p = p->next;
+        }
+        if(p->data == q->data){
+            q->next = p->next;
+            p->next =NULL;
+            delete(p);
+            p = q->next;
+        }
+    }
+    display(first);
+}
+
 int main(){
-    int A[] = {1,2,3,4,5,6,7};
-    Create(A, 7);
+    int A[] = {3, 5, 8, 8, 10, 10, 10, 12};
+    Create(A, 8);
+    cout<<"Before removing dup : "<<endl;
+    reDup(first);
     // display(first);
     // cout<<"The number of nodes in the linked list is : "<<Count(first)<<endl;
     // cout<<"The sum of elements in the linked list is : "<<SumOfElements(first)<<endl;
@@ -114,11 +133,15 @@ int main(){
     // else
     //     cout<<"Key wasn't found."<<endl;
 
-    int k, pos;
-    cout<<"Enter a key to insert : ";
-    cin>>k;
-    cout<<"Enter the position you want to insert : ";
-    cin>>pos;
-    insertFirst(k, pos);
+    // int k, pos;
+    // cout<<"Enter a key to insert : ";
+    // cin>>k;
+    // cout<<"Enter the position you want to insert : ";
+    // cin>>pos;
+    // insertFirst(k, pos);
+
+    cout<<"After removing : "<<endl;
+    reDup(first);
+
     return 0;
 }
