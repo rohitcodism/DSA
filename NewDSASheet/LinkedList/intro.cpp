@@ -117,6 +117,10 @@ void reDup(Node *p){
     display(first);
 }
 
+void Reverse(Node *p){
+    
+}
+
 int main(){
     int A[] = {3, 5, 8, 8, 10, 10, 10, 12};
     Create(A, 8);
