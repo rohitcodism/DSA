@@ -101,17 +101,17 @@ void insertFirst(int key, int pos){
 }
 
 void reDup(Node *p){
-    Node *q = NULL;
-    while(p){
+    Node *q = first->next;
+    while(q != NULL){
         if(p->data != q->data){
-            q = p;
-            p = p->next;
+            p = q;
+            q = q->next;
         }
-        if(p->data == q->data){
-            q->next = p->next;
+        else if(p->data == q->data){
+            p->next = q->next;
             p->next =NULL;
             delete(p);
-            p = q->next;
+            q = p->next;
         }
     }
     display(first);
@@ -121,7 +121,7 @@ int main(){
     int A[] = {3, 5, 8, 8, 10, 10, 10, 12};
     Create(A, 8);
     cout<<"Before removing dup : "<<endl;
-    reDup(first);
+    display(first);
     // display(first);
     // cout<<"The number of nodes in the linked list is : "<<Count(first)<<endl;
     // cout<<"The sum of elements in the linked list is : "<<SumOfElements(first)<<endl;
