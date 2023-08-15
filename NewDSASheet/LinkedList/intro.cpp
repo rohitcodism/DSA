@@ -109,8 +109,8 @@ void reDup(Node *p){
         }
         else if(p->data == q->data){
             p->next = q->next;
-            p->next =NULL;
-            delete(p);
+            q->next = NULL;
+            delete(q);
             q = p->next;
         }
     }
