@@ -22,22 +22,24 @@ int getNthFromLast(struct Node *head, int n);
 class Solution
 {
 public:
-    int getNthFromLast(Node *head, int n)
+    int getNthFromLast(struct Node *head, int n)
     {
         // Your code here
-        int i, count, length;
-        Node *q = head;
+        int i, count, length, pos;
+        struct Node *q = head;
         while (q)
         {
             q = q->next;
             count++;
         }
         length = count;
+        pos = length - n;
         q = head;
         count = 0;
-        while (count != (length - (n - 1)))
+        while (count != pos)
         {
             q = q->next;
+            count++;
         }
         return q->data;
     }
