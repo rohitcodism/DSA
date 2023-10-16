@@ -22,6 +22,7 @@ void Create(int a[], int n){
         last->next = t;
         last = t;
     }
+    last->next = first;
 }
 
 void display(Node *p){
@@ -151,11 +152,44 @@ void Reverse2(Node *p){
 
 }
 
+    void removeLoop(Node* head)
+    {
+        // code here
+        // just remove the loop without losing any nodes
+        Node *p, *q, *r;
+        p = q = r = head;
+        if(head->next != NULL){
+            do{
+                    q = q->next;
+                    p = p->next;
+                    if(p)
+                        p = p->next;
+                    else
+                        p = NULL;
+            }while(p && q && p!=q);
+        }
+        if(p == q){
+            q = p->next;
+            while(p != q){
+                r = q;
+                q = q->next;
+            }
+            if(p == r){
+                p->next = NULL;
+                r->next = NULL;
+            }else{
+                r->next = NULL;
+            }
+        }
+        cout<<p->next<<endl;
+        display(head);
+    }
+
 int main(){
-    int A[] = {2,4,6,8};
-    Create(A, 4);
-    cout<<"Before removing dup : "<<endl;
-    display(first);
+    int A[] = {1, 3, 4};
+    Create(A, 3);
+    //cout<<"Before removing dup : "<<endl;
+    //display(first);
     // display(first);
     // cout<<"The number of nodes in the linked list is : "<<Count(first)<<endl;
     // cout<<"The sum of elements in the linked list is : "<<SumOfElements(first)<<endl;
@@ -177,8 +211,7 @@ int main(){
     // cout<<"After removing : "<<endl;
     // reDup(first);
 
-    cout<<"After Reversing : "<<endl;
-    Reverse2(first);
+    removeLoop(first);
 
     return 0;
 }
