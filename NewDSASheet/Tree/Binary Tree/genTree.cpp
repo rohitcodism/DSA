@@ -49,7 +49,6 @@ class BinaryTree {
         }
 
         void display(){
-            cout<<"Pre Order Traversal of your tree : "<<endl;
             displayRecursive(root);
         }
 
@@ -94,6 +93,33 @@ class BinaryTree {
             inOrder(root);
         }
 
+        void levelOrder(Node *root){
+
+            if(root == nullptr)
+                return;
+
+            queue<Node *>  Q;
+            Q.push(root);
+
+            while(!Q.empty()){
+                Node *current = Q.front();
+                cout<<current->data<<endl;
+                Q.pop();
+
+                if(current->left)
+                    Q.push(current->left);
+                if(current->right)
+                    Q.push(current->right);    
+            }
+
+            cout<<endl;
+        }
+
+        void levelOrderTraversal(){
+            cout<<"Level Order Traversal : "<<endl;
+            levelOrder(root);
+        }
+
 };
 
 int main()
@@ -108,6 +134,7 @@ int main()
         cout<<"3. Pre Order Traversal\n";
         cout<<"4. In Order Traversal\n";
         cout<<"5. Post Order Traversal\n";
+        cout<<"6. Level Order Traversal\n";
         std::cout << "0. Exit\n";
         std::cout << "Enter your choice: ";
         std::cin >> choice;
@@ -131,7 +158,10 @@ int main()
                 break;
             case 5:
                 tree.postOrderTraversal();
-                break;        
+                break;
+            case 6:
+                tree.levelOrderTraversal();
+                break;            
             case 0:
                 cout << "Exiting the program.\n";
                 break;
