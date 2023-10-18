@@ -141,6 +141,49 @@ class BinaryTree {
             Search(root, key);
         }
 
+        void Insert(Node *p, int value, Node *follower){
+            Node *r = NULL, *t;
+            while(p != NULL){
+                follower = p;
+                if(p->data == value)
+                    return;
+                else if(p->data<value)
+                    p = p->right;
+                else if(p->data>value)
+                    p = p->left;
+            }
+            t = new Node(value);
+            if(follower->data>t->data){follower->left = t;cout<<"Node inserted successfully !!"; display();}
+            else{follower->right = t;cout<<"Node inserted successfully !!"; display();}
+        }
+
+        void Insertion(int value){
+            Node *r;
+            Insert(root, value, r);
+        }
+
+        Node *RInsert(Node *p, int value){
+            Node *t;
+            if(p == NULL){
+                t = new Node(value);
+                cout<<"Node Inserted Successfully !!"<<endl;
+                return t;
+            }
+            else
+            {
+                if(value<p->data){
+                    p->left = RInsert(p->left, value);
+                }
+                else if(value>p->data)
+                    p->right = RInsert(p->right, value);
+                return p;
+            }
+        }
+
+        void FastInsert(int value){
+            RInsert(root, value);
+        }
+
 };
 
 int main()
@@ -157,6 +200,8 @@ int main()
         cout<<"5. Post Order Traversal\n";
         cout<<"6. Level Order Traversal\n";
         cout<<"7. Search Operation \n";
+        cout<<"8. Insertion Operation \n";
+        cout<<"9. Fast Insert \n";
         std::cout << "0. Exit\n";
         std::cout << "Enter your choice: ";
         std::cin >> choice;
@@ -190,7 +235,21 @@ int main()
                 cin>>key;
                 cout<<endl;
                 tree.searchTree(key);
-                break;               
+                break; 
+            case 8:
+                int value;
+                cout<<"Enter the value you want to insert : ";
+                cin>>value;
+                cout<<endl;
+                tree.Insertion(value);
+                break;
+            case 9:
+                int Ivalue;
+                cout<<"Enter the value you want to insert : ";
+                cin>>Ivalue;
+                cout<<endl;
+                tree.FastInsert(Ivalue);
+                break;
             case 0:
                 cout << "Exiting the program.\n";
                 break;
@@ -198,6 +257,7 @@ int main()
                 cout << "Invalid choice. Please try again.\n";
         }
     } while (choice != 0);
+
 
     return 0;
 }
