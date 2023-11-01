@@ -184,6 +184,70 @@ class BinaryTree {
             RInsert(root, value);
         }
 
+        int Height(Node *p){
+            int x,y;
+            if(!p)
+                return 0;
+            x = Height(p->left);
+            y = Height(p->right);
+            return x>y?x+1:y+1;
+        }
+
+        Node *inPre(struct Node *p){
+            while(p && p->right)
+                p = p->right;
+            return p;
+        }
+
+        Node *inSucc(struct Node *p){
+            while(p && p->left)
+                p = p->left;
+            return p;
+        }
+
+        Node *Delete(Node *p, int key){
+
+            struct Node *q;
+            if(!p)
+                return NULL;
+            if(!p->left && !p->right){
+                if(p == root)
+                {
+                    root = NULL;
+                    free(p);
+                    return NULL;
+                }
+            }
+
+
+            if(key<p->data){
+                p->left = Delete(p->left, key);
+            }
+            else if(key>p->data){
+                p->right = Delete(p->right, key);
+            }
+            else
+            {
+                if(Height(p->left)>Height(p->right))
+                {
+                    q = inPre(p->left);
+                    p->data = q->data;
+                    Delete(p->left, q->data);
+                }
+                else
+                {
+                    q = inSucc(p->right);
+                    p->data = q->data;
+                    Delete(p->right, q->data);
+                }
+            }
+            return p;
+        }
+
+        void keyDelete(int value){
+            Node *q = Delete(root, value);
+        }
+
 };
 
 int main()
@@ -202,6 +266,7 @@ int main()
         cout<<"7. Search Operation \n";
         cout<<"8. Insertion Operation \n";
         cout<<"9. Fast Insert \n";
+        cout<<"10. Deletion \n";
         std::cout << "0. Exit\n";
         std::cout << "Enter your choice: ";
         std::cin >> choice;
@@ -237,7 +302,6 @@ int main()
                 tree.searchTree(key);
                 break; 
             case 8:
-                int value;
                 cout<<"Enter the value you want to insert : ";
                 cin>>value;
                 cout<<endl;
@@ -250,6 +314,12 @@ int main()
                 cout<<endl;
                 tree.FastInsert(Ivalue);
                 break;
+            case 10:
+                int dValue;
+                cout<<"Enter the key to delete : ";
+                cin>>dValue;
+                cout<<endl;
+                tree.keyDelete(dValue);
             case 0:
                 cout << "Exiting the program.\n";
                 break;
