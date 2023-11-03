@@ -47,15 +47,46 @@ Node *LLRotation(Node *p){
 }
 
 Node *LRRotation(Node *p){
-    return p;
+    Node *pl = p->left;
+    Node *plr = p->left->right;
+    plr->right = p;
+    plr->left = pl;
+    p->height = nodeHeight(p);
+    pl->height = nodeHeight(pl);
+    plr->height = nodeHeight(plr);
+
+    if(root == p)
+        root = plr;
+    
+    return plr;
 }
 
 Node *RRRotation(Node *p){
-    return p;
+    Node *pr = p->right;
+    Node *prl = p->right->left?p->right->left:nullptr;
+
+    pr->left = p;
+    p->right = prl;
+    p->height = nodeHeight(p);
+    pr->height = nodeHeight(pr);
+    prl->height = nodeHeight(prl);
+    if(root == p)
+        root = pr;
+    return pr;
 }
 
 Node *RLRotation(Node *p){
-    return p;
+    Node *pr = p->right;
+    Node *prl = p->right->left;
+    prl->left = p;
+    prl->right = pr;
+    p->height = nodeHeight(p);
+    pr->height = nodeHeight(pr);
+    prl->height = nodeHeight(prl);
+    
+    if(root == p)
+        root = prl;
+    return prl;
 }
 
 Node *RInsert(Node *p, int value)
@@ -101,9 +132,8 @@ Node *RInsert(Node *p, int value)
 int main()
 {
     root = RInsert(root,10);
-    RInsert(root, 5);
-    RInsert(root,2);
     RInsert(root, 12);
-    cout<<root->data<<endl<<root->right->left<<endl;
+    RInsert(root,17);
+    cout<<root->data<<endl<<endl;
     return 0;
 }
