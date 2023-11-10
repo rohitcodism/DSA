@@ -49,6 +49,8 @@ Node *LLRotation(Node *p){
 Node *LRRotation(Node *p){
     Node *pl = p->left;
     Node *plr = p->left->right;
+    p->right = plr->left;
+    p->left = p;
     plr->right = p;
     plr->left = pl;
     p->height = nodeHeight(p);
@@ -78,6 +80,9 @@ Node *RRRotation(Node *p){
 Node *RLRotation(Node *p){
     Node *pr = p->right;
     Node *prl = p->right->left;
+
+    p->right = prl->left;
+    pr->left = prl->right;
     prl->left = p;
     prl->right = pr;
     p->height = nodeHeight(p);
