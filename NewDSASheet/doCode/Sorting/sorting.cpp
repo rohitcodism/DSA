@@ -51,6 +51,19 @@ void modifiedBubbleSort(int arr[], int n){
     display(arr, n);
 }
 
+void selectionSort(int arr[], int n){
+    for(int i = 0;i<n-1;i++){
+        int minIndex = i;
+        for(int j = i+1;j<n;j++){
+            if(arr[j]<arr[minIndex]){
+                minIndex = j;
+            }
+        }
+        swap(arr[i], arr[minIndex]);
+    }
+    display(arr, n);
+}
+
 int main()
 {
     int n, x;
@@ -65,7 +78,7 @@ int main()
     }
     do
     {
-        cout << "Enter your choice : \n1. Display the array\n2. Edit the array\n3. Bubble Sort\n4. Modified Bubble Sort"<<endl;
+        cout << "Enter your choice : \n1. Display the array\n2. Edit the array\n3. Bubble Sort\n4. Modified Bubble Sort\n5. Selection Sort"<<endl;
         cin >> x;
         cout << endl;
         switch(x)
@@ -88,6 +101,9 @@ int main()
                 break;
             case 4:
                 modifiedBubbleSort(a,n);
+                break;
+            case 5:
+                selectionSort(a,n);
                 break;
             default:
                 cout<<"Invalid choice try again!!!"<<endl;
