@@ -176,12 +176,25 @@ void mergeByGPT(int arr[], int low, int mid, int high) {
 
     int left[n1], right[n2];
 
+    // Copy elements to left and right sub-arrays
     for (int i = 0; i < n1; ++i) {
         left[i] = arr[low + i];
     }
     for (int j = 0; j < n2; ++j) {
         right[j] = arr[mid + 1 + j];
     }
+
+    // Print left and right sub-arrays
+    cout << "Left sub-array: ";
+    for (int i = 0; i < n1; ++i) {
+        cout << left[i] << " ";
+    }
+    cout << endl;
+    cout << "Right sub-array: ";
+    for (int j = 0; j < n2; ++j) {
+        cout << right[j] << " ";
+    }
+    cout << endl;
 
     int i = 0, j = 0, k = low;
     while (i < n1 && j < n2) {
@@ -198,16 +211,43 @@ void mergeByGPT(int arr[], int low, int mid, int high) {
     while (j < n2) {
         arr[k++] = right[j++];
     }
+
+    // Print merged sub-array
+    cout << "After merging sub-arrays [" << low << "->" << mid << "] and [" << (mid + 1) << "->" << high << "]: ";
+    for (int t = low; t <= high; ++t) {
+        cout << arr[t] << " ";
+    }
+    cout << endl;
 }
+
 
 void mergeSortByGPT(int arr[], int low, int high) {
     if (low < high) {
         int mid = low + (high - low) / 2;
+        cout << "Splitting array from index " << low << " to " << high << endl;
+        cout << "Left sub-array: ";
+        for (int i = low; i <= mid; ++i) {
+            cout << arr[i] << " ";
+        }
+        cout << endl;
+        cout << "Right sub-array: ";
+        for (int i = mid + 1; i <= high; ++i) {
+            cout << arr[i] << " ";
+        }
+        cout << endl;
+
         mergeSortByGPT(arr, low, mid);
         mergeSortByGPT(arr, mid + 1, high);
+        cout << "Merging sub-arrays [" << low << ":" << mid << "] and [" << (mid + 1) << ":" << high << "]" << endl;
         mergeByGPT(arr, low, mid, high);
+        cout << "After merge: ";
+        for (int i = low; i <= high; ++i) {
+            cout << arr[i] << " ";
+        }
+        cout << endl;
     }
 }
+
 
 int main()
 {
