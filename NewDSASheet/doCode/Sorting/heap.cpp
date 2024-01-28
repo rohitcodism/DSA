@@ -1,3 +1,4 @@
+
 #include <iostream>
 using namespace std;
 
@@ -9,61 +10,17 @@ void Display(int A[], int n)
     }
     cout << endl;
 }
-
 void insertHeap(int A[], int n)
 {
-    cout<<"Inside insert function"<<endl;
     int temp = A[n];
     int i = n;
-    cout<<"Before while loop : "<<endl;
-    cout<<"n: "<<n<<endl;
-    cout<<"i: "<<i<<endl;
-    cout<<"A[i/2]: "<<A[i/2]<<endl;
-    cout<<"A[i]: "<<A[i]<<endl;
-    cout<<"temp: "<<temp<<endl;
-    Display(A,n);
     while (i > 1 && temp > A[i / 2])
     {
         A[i] = A[i / 2];
         i = i / 2;
     }
     A[i] = temp;
-    cout<<"---------------"<<endl;
-    cout<<"After while loop : "<<endl;
-    cout<<"n: "<<n<<endl;
-    cout<<"i: "<<i<<endl;
-    cout<<"temp: "<<temp<<endl;
-    cout<<"A[i/2]: "<<A[i/2]<<endl;
-    cout<<"A[i]: "<<A[i]<<endl;
-    Display(A,n);
-    cout<<"Exiting insert function"<<endl;
-    cout<<"-------------------------------"<<endl;
 }
-
-void deleteElement(int A[], int n){
-    int x,i,j;
-    x = A[n];
-
-    A[1] = A[n];
-
-    i = 1;
-    j = i * 2;
-
-    while(j = n-1){
-        if(A[j+1]>A[j]){
-            j = j+1;
-        }
-
-        if(A[i]<A[j]){
-            swap(A[i], A[j]);
-            i = j;
-            j = 2*j;
-        }else{
-            break;
-        }
-    }
-}
-
 void createHeap(int a[], int length)
 {
     for (int i = 2; i <= length; i++)
@@ -72,43 +29,86 @@ void createHeap(int a[], int length)
     }
 }
 
+int deleteElement(int A[], int n)
+{
+    int x, i, j, val;
+    x = A[n];
+
+    val = A[1];
+
+    A[1] = A[n];
+
+    i = 1;
+    j = i * 2;
+
+    while (j < n - 1)
+    {
+        if (A[j + 1] > A[j])
+        {
+            j = j + 1;
+        }
+
+        if (A[i] < A[j])
+        {
+            swap(A[i], A[j]);
+            i = j;
+            j = 2 * j;
+        }
+        else
+        {
+            break;
+        }
+    }
+    A[n] = val;
+    return val;
+}
+
 int main()
 {
+    /* The code snippet initializes an array `H` with the values `{0, 10, 20, 30, 25, 5, 40, 35}`. This
+    array represents a heap data structure. The comment `// after inserting the elements in the heap:
+    40,25,35,10,5,20,30` indicates the expected order of the elements in the heap after inserting them. */
 
-    // Taking input from the user of the length of the array
-    int length;
-    cout << "Enter the length of the array: ";
-    cin >> length;
-    cout << endl;
+    int H[] = {0, 10, 20, 30, 25, 5, 40, 35};
+    //** after inserting the elements in the heap: 40,25,35,10,5,20,30
 
-    // Creating an array of the given length
-    int a[length];
+    /* The code snippet is inserting elements into the heap. It starts from index 2 and iterates up to
+    index 7 (inclusive). For each index, it calls the `insertHeap` function to insert the element at
+    that index into the heap. After inserting all the elements, it displays the heap by calling the
+    `Display` function. */
+    // inserting elements into the heap
 
-    // Inserting elements into the array
-    cout << "Enter the elements of the array: ";
-    for (int i = 1; i <= length; i++)
+    for (int i = 2; i <= 7; i++)
     {
-        cin >> a[i];
+        insertHeap(H, i);
     }
+
+    cout << "The heap is: ";
+    Display(H, 7);
+
+    /* The code is deleting an element from the heap and then displaying the updated heap. */
+
+    cout << "After deleting the deleted element from the heap is: " << deleteElement(H, 7) << endl;
+
+    cout << "After deletion the heap is: ";
+    Display(H, 7);
     cout << endl;
 
-    // Creating a heap from the array
-    createHeap(a, length);
+    /* The code snippet is performing heap sort on the given heap. It starts from the last element of the
+    heap and repeatedly deletes the root element (which is the maximum element in a max heap) and places
+    it at the end of the array. This process is repeated until all elements are sorted in ascending
+    order. Finally, it displays the sorted heap. */
 
-    // Displaying the heap
-    cout << "The heap is: ";
-    Display(a, length);
+    //** Heap sort
+    for (int i = 7; i > 1; i--)
+    {
+        deleteElement(H, i);
+    }
 
-    // // deleting a element from the heap
-    // deleteElement(a,length);
+    cout << "After sorting the heap is: ";
+    Display(H, 7);
 
-    // cout<<"After deleting an element the heap is : ";
-    // Display(a,length);
+    // after deleting the element from the heap: 35,25,30,10,5,20
 
-    // Inserting an element into the heap
-    // cout << "Enter the element to be inserted: ";
-    // int element;
-    // cin >> element;
-    // cout << endl;
-    // insertHeap(a, length);
+    return 0;
 }
