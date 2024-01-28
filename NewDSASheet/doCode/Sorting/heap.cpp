@@ -42,7 +42,7 @@ void insertHeap(int A[], int n)
 
 void deleteElement(int A[], int n){
     int x,i,j;
-    int x = A[n];
+    x = A[n];
 
     A[1] = A[n];
 
@@ -98,4 +98,17 @@ int main()
     // Displaying the heap
     cout << "The heap is: ";
     Display(a, length);
+
+    // // deleting a element from the heap
+    // deleteElement(a,length);
+
+    // cout<<"After deleting an element the heap is : ";
+    // Display(a,length);
+
+    // Inserting an element into the heap
+    // cout << "Enter the element to be inserted: ";
+    // int element;
+    // cin >> element;
+    // cout << endl;
+    // insertHeap(a, length);
 }
