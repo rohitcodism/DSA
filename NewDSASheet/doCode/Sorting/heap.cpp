@@ -10,6 +10,13 @@ void Display(int A[], int n)
     }
     cout << endl;
 }
+
+void swap(int &a, int &b)
+{
+    int temp = a;
+    a = b;
+    b = temp;
+}
 void insertHeap(int A[], int n)
 {
     int temp = A[n];
@@ -63,6 +70,24 @@ int deleteElement(int A[], int n)
     return val;
 }
 
+void heapify(int A[], int n){
+    int temp = A[n];
+    int i = n;
+
+    while(i>1 && (temp > A[i*2] || temp > A[i*2+1] )){
+        if(A[i*2+1] > A[i*2]){
+            A[i] = A[i*2+1];
+            i = i*2+1;
+        }
+        else{
+            A[i] = A[i*2];
+            i = i*2;
+        }
+        i--;
+    }
+    A[i] = temp;
+}
+
 int main()
 {
     /* The code snippet initializes an array `H` with the values `{0, 10, 20, 30, 25, 5, 40, 35}`. This
@@ -76,39 +101,47 @@ int main()
     index 7 (inclusive). For each index, it calls the `insertHeap` function to insert the element at
     that index into the heap. After inserting all the elements, it displays the heap by calling the
     `Display` function. */
-    // inserting elements into the heap
+    // inserting elements into the heap and creating a heap
+    //TODO: time complexity: O(nlogn)
 
-    for (int i = 2; i <= 7; i++)
-    {
-        insertHeap(H, i);
-    }
+    // for (int i = 2; i <= 7; i++)
+    // {
+    //     insertHeap(H, i);
+    // }
 
-    cout << "The heap is: ";
-    Display(H, 7);
+    // cout << "The heap is: ";
+    // Display(H, 7);
 
     /* The code is deleting an element from the heap and then displaying the updated heap. */
 
-    cout << "After deleting the deleted element from the heap is: " << deleteElement(H, 7) << endl;
+    //** after deleting the element from the heap: 35,25,30,10,5,20
+    //TODO: time complexity: O(logn)
 
-    cout << "After deletion the heap is: ";
-    Display(H, 7);
-    cout << endl;
+    // cout << "After deleting the deleted element from the heap is: " << deleteElement(H, 7) << endl;
+
+    // cout << "After deletion the heap is: ";
+    // Display(H, 7);
+    // cout << endl;
 
     /* The code snippet is performing heap sort on the given heap. It starts from the last element of the
     heap and repeatedly deletes the root element (which is the maximum element in a max heap) and places
     it at the end of the array. This process is repeated until all elements are sorted in ascending
     order. Finally, it displays the sorted heap. */
 
-    //** Heap sort
-    for (int i = 7; i > 1; i--)
-    {
-        deleteElement(H, i);
-    }
+    // //** Heap sort
+    // //TODO: time complexity: O(nlogn)
+    // for (int i = 7; i > 1; i--)
+    // {
+    //     deleteElement(H, i);
+    // }
 
-    cout << "After sorting the heap is: ";
+    // cout << "After sorting the heap is: ";
+    // Display(H, 7);
+
+    // Heapify
+    heapify(H,7);
+    cout << "After heapify the heap is: ";
     Display(H, 7);
-
-    // after deleting the element from the heap: 35,25,30,10,5,20
 
     return 0;
 }
