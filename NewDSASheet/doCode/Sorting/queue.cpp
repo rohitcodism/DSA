@@ -105,13 +105,13 @@ int main() {
             case 3:
                 display(&q1);
                 break;
-            case 4:
+            case 0:
                 cout << "Exiting program" << endl;
                 break;
             default:
                 cout << "Invalid choice! Please enter a valid option." << endl;
         }
-    } while (choice != 4);
+    } while (choice);
 
     delete[] q1.Q; // Freeing dynamically allocated memory
     return 0;
