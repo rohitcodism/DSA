@@ -66,35 +66,53 @@ int deQueue(Queue *q){
     else{
         int x = q->Q[q->front++];
         display(q);
+
+        //** if the queue is empty after dequeueing the element then reset the front and rear
+        if(q->front == q->rear){
+            q->front = q->rear = -1;
+        }
         return x;
     }
 }
 
-int main()
-{
-
-    struct Queue q1;
-
-    cout << "Enter the size of the queue: ";
-    cin >> q1.size;
-    cout << endl;
-
-    q1.Q = new int[q1.size]; // TODO: To create a dynamic array we need to create it like this
+int main() {
+    Queue q1;
     q1.front = q1.rear = -1;
 
-    enQueue(&q1,5);
-    enQueue(&q1,4);
-    enQueue(&q1,3);
-    enQueue(&q1,2);
-    enQueue(&q1,1);
-    enQueue(&q1,0);
+    int choice, element;
+    cout << "Enter the size of the queue: ";
+    cin >> q1.size;
+    q1.Q = new int[q1.size];
 
-    deQueue(&q1);
-    deQueue(&q1);
-    deQueue(&q1);
-    deQueue(&q1);
-    deQueue(&q1);
-    deQueue(&q1);
+    do {
+        cout << "\n------ Menu ------" << endl;
+        cout << "1. Enqueue" << endl;
+        cout << "2. Dequeue" << endl;
+        cout << "3. Display" << endl;
+        cout << "0. Exit" << endl;
+        cout << "Enter your choice: ";
+        cin >> choice;
 
+        switch (choice) {
+            case 1:
+                cout << "Enter element to enqueue: ";
+                cin >> element;
+                enQueue(&q1, element);
+                break;
+            case 2:
+                deQueue(&q1);
+                break;
+            case 3:
+                display(&q1);
+                break;
+            case 4:
+                cout << "Exiting program" << endl;
+                break;
+            default:
+                cout << "Invalid choice! Please enter a valid option." << endl;
+        }
+    } while (choice != 4);
+
+    delete[] q1.Q; // Freeing dynamically allocated memory
     return 0;
 }
