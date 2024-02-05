@@ -30,6 +30,12 @@ public:
     void push(int d)
     {
         Node *newNode = new Node(d);
+
+        if(!newNode){
+            cout<<"Heap Overflow"<<endl;
+            return;
+        }
+
         if (top == nullptr)
         {
             newNode->next = top;
