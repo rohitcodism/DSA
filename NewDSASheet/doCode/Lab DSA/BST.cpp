@@ -1,138 +1,333 @@
-// implementation of Binary Search Tree
-
-#include<iostream>
+#include <iostream>
+#include <queue>
 using namespace std;
 
-struct Node
-{
-    int data;
+class Node{
+    public:
     Node *left;
     Node *right;
-    Node(int val){
-        data = val;
-        left = nullptr;
-        right = nullptr;
+    int data;
+
+    Node(){data = 0;left = right = nullptr;};
+    Node( int value){
+        data = value;
+        left = right = NULL;
     }
 };
 
-void Display(Node *root){
-    if(root == nullptr){
-        return;
-    }
-    cout << root->data << " ";
-    Display(root->left);
-    Display(root->right);
-}
-
-Node *insertBST(Node *root, int val){
-    if(root == nullptr){
-        return new Node(val);
-    }
-    if(val < root->data){
-        root->left = insertBST(root->left, val);
-    }
-    else{
-        root->right = insertBST(root->right, val);
-    }
-    return root;
-}
-
-void inorder(Node *root){
-    if(root == nullptr){
-        return;
-    }
-    inorder(root->left);
-    cout << root->data << " ";
-    inorder(root->right);
-}
-
-void preorder(Node *root){
-    if(root == nullptr){
-        return;
-    }
-    cout << root->data << " ";
-    preorder(root->left);
-    preorder(root->right);
-}
-
-void postorder(Node *root){
-    if(root == nullptr){
-        return;
-    }
-    postorder(root->left);
-    postorder(root->right);
-    cout << root->data << " ";
-}
-
-Node *searchBST(Node *root, int key){
-    if(root == nullptr){
-        return nullptr;
-    }
-    if(root->data == key){
-        return root;
-    }
-    if(key < root->data){
-        return searchBST(root->left, key);
-    }
-    return searchBST(root->right, key);
-}
-
-Node *inorderSucc(Node *root){
-    Node *curr = root;
-    while(curr && curr->left != nullptr){
-        curr = curr->left;
-    }
-    return curr;
-}
-
-Node *deleteBST(Node *root, int key){
-    if(key < root->data){
-        root->left = deleteBST(root->left, key);
-    }
-    else if(key > root->data){
-        root->right = deleteBST(root->right, key);
-    }
-    else{
-        if(root->left == nullptr){
-            Node *temp = root->right;
-            free(root);
-            return temp;
+class BinaryTree {
+    public:
+        Node *root;
+        BinaryTree(){
+            root = nullptr;
         }
-        else if(root->right == nullptr){
-            Node *temp = root->left;
-            free(root);
-            return temp;
-        }
-        Node *temp = inorderSucc(root->right);
-        root->data = temp->data;
-        root->right = deleteBST(root->right, temp->data);
-    }
-    return root;
-}
 
-int main(){
-    Node *root = nullptr;
-    root = insertBST(root, 5);
-    insertBST(root, 1);
-    insertBST(root, 3);
-    insertBST(root, 4);
-    insertBST(root, 2);
-    insertBST(root, 7);
-    // Display(root);
-    // inorder(root);
-    // cout << endl;
-    // preorder(root);
-    // cout << endl;
-    // postorder(root);
-    // cout << endl;
-    // if(searchBST(root, 4) == nullptr){
-    //     cout << "Key doesn't exist" << endl;
-    // }
-    // else{
-    //     cout << "Key exists" << endl;
-    // }
-    deleteBST(root, 3);
-    inorder(root);
-    cout << endl;
+        Node *insertRecursive(Node *root, int value){
+            if(root == nullptr){
+                return new Node(value);
+            }
+
+            if(value<root->data){
+                root->left = insertRecursive(root->left, value);
+            }else if(value>root->data){
+                root->right = insertRecursive(root->right, value);
+            }
+
+            return root;
+        }
+
+        void insert(int value){
+            root = insertRecursive(root, value);
+        }
+
+        void displayRecursive(Node *root){
+            if(root != nullptr){
+                displayRecursive(root->left);
+                cout<<root->data<<endl;
+                displayRecursive(root->right);
+            }
+        }
+
+        void display(){
+            displayRecursive(root);
+        }
+
+        void preOrder(Node *root)
+        {
+            if (root != nullptr)
+            {
+                cout << root->data << endl;
+                preOrder(root->left);
+                preOrder(root->right);
+            }
+        }
+
+        void preOrderTraversal(){
+            cout<<"Post Order Traversal of your tree : "<<endl;
+            preOrder(root);
+        }
+        void postOrder(Node *root)
+        {
+            if (root != nullptr)
+            {
+                postOrder(root->left);
+                postOrder(root->right);
+                cout << root->data << endl;
+            }
+        }
+
+        void postOrderTraversal(){
+            cout<<"Post Order Traversal of your tree : "<<endl;
+            postOrder(root);
+        }
+        void inOrder(Node *root){
+            if (root != nullptr)
+            {
+                inOrder(root->left);
+                cout << root->data << endl;
+                inOrder(root->right);
+            }
+        }
+
+        void inOrderTraversal(){
+            inOrder(root);
+        }
+
+        void levelOrder(Node *root){
+
+            if(root == nullptr)
+                return;
+
+            queue<Node *>  Q;
+            Q.push(root);
+
+            while(!Q.empty()){
+                Node *current = Q.front();
+                cout<<current->data<<endl;
+                Q.pop();
+
+                if(current->left)
+                    Q.push(current->left);
+                if(current->right)
+                    Q.push(current->right);    
+            }
+
+            cout<<endl;
+        }
+
+        void levelOrderTraversal(){
+            cout<<"Level Order Traversal : "<<endl;
+            levelOrder(root);
+        }
+
+        void Search(Node *root, int key){
+            if(root!=nullptr){
+                if(key == root->data){
+                    cout<<"Key was found"<<endl;
+                }
+                else if(key<root->data){
+                    Search(root->left, key);
+                }
+                else if(key>root->data){
+                    Search(root->right, key);
+                }
+            }
+            else {
+                cout<<"Key wasn't found in the tree."<<endl;
+            }
+        }
+
+        void searchTree(int key){
+            Search(root, key);
+        }
+
+        void Insert(Node *p, int value, Node *follower){
+            Node *r = NULL, *t;
+            while(p != NULL){
+                follower = p;
+                if(p->data == value)
+                    return;
+                else if(p->data<value)
+                    p = p->right;
+                else if(p->data>value)
+                    p = p->left;
+            }
+            t = new Node(value);
+            if(follower->data>t->data){follower->left = t;cout<<"Node inserted successfully !!"; display();}
+            else{follower->right = t;cout<<"Node inserted successfully !!"; display();}
+        }
+
+        void Insertion(int value){
+            Node *r;
+            Insert(root, value, r);
+        }
+
+        Node *RInsert(Node *p, int value){
+            Node *t;
+            if(p == NULL){
+                t = new Node(value);
+                cout<<"Node Inserted Successfully !!"<<endl;
+                return t;
+            }
+            else
+            {
+                if(value<p->data){
+                    p->left = RInsert(p->left, value);
+                }
+                else if(value>p->data)
+                    p->right = RInsert(p->right, value);
+                return p;
+            }
+        }
+
+        void FastInsert(int value){
+            RInsert(root, value);
+        }
+
+        int Height(Node *p){
+            int x,y;
+            if(!p)
+                return 0;
+            x = Height(p->left);
+            y = Height(p->right);
+            return x>y?x+1:y+1;
+        }
+
+        Node *inPre(struct Node *p){
+            while(p && p->right)
+                p = p->right;
+            return p;
+        }
+
+        Node *inSucc(struct Node *p){
+            while(p && p->left)
+                p = p->left;
+            return p;
+        }
+
+        Node *Delete(Node *p, int key){
+
+            struct Node *q;
+            if(!p)
+                return NULL;
+            if(!p->left && !p->right){
+                if(p == root)
+                {
+                    root = NULL;
+                    free(p);
+                    return NULL;
+                }
+            }
+
+
+            if(key<p->data){
+                p->left = Delete(p->left, key);
+            }
+            else if(key>p->data){
+                p->right = Delete(p->right, key);
+            }
+            else
+            {
+                if(Height(p->left)>Height(p->right))
+                {
+                    q = inPre(p->left);
+                    p->data = q->data;
+                    Delete(p->left, q->data);
+                }
+                else
+                {
+                    q = inSucc(p->right);
+                    p->data = q->data;
+                    Delete(p->right, q->data);
+                }
+            }
+            return p;
+        }
+
+        void keyDelete(int value){
+            Node *q = Delete(root, value);
+        }
+
+};
+
+int main()
+{
+        BinaryTree tree;
+    int choice, value;
+
+    do {
+        std::cout << "\nBinary Tree Menu:\n";
+        std::cout << "1. Insert a node\n";
+        std::cout << "2. Display the tree\n";
+        cout<<"3. Pre Order Traversal\n";
+        cout<<"4. In Order Traversal\n";
+        cout<<"5. Post Order Traversal\n";
+        cout<<"6. Level Order Traversal\n";
+        cout<<"7. Search Operation \n";
+        cout<<"8. Insertion Operation \n";
+        cout<<"9. Fast Insert \n";
+        cout<<"10. Deletion \n";
+        std::cout << "0. Exit\n";
+        std::cout << "Enter your choice: ";
+        std::cin >> choice;
+
+        switch (choice) {
+            case 1:
+                cout << "Enter the value to insert: ";
+                cin >> value;
+                tree.insert(value);
+                break;
+            case 2:
+                cout << "Binary Tree: ";
+                tree.display();
+                cout << endl;
+                break;
+            case 3:
+                tree.preOrderTraversal();
+                break;
+            case 4:
+                tree.inOrderTraversal();
+                break;
+            case 5:
+                tree.postOrderTraversal();
+                break;
+            case 6:
+                tree.levelOrderTraversal();
+                break; 
+            case 7:
+                int key;
+                cout<<"Enter the value you want to found : ";
+                cin>>key;
+                cout<<endl;
+                tree.searchTree(key);
+                break; 
+            case 8:
+                cout<<"Enter the value you want to insert : ";
+                cin>>value;
+                cout<<endl;
+                tree.Insertion(value);
+                break;
+            case 9:
+                int Ivalue;
+                cout<<"Enter the value you want to insert : ";
+                cin>>Ivalue;
+                cout<<endl;
+                tree.FastInsert(Ivalue);
+                break;
+            case 10:
+                int dValue;
+                cout<<"Enter the key to delete : ";
+                cin>>dValue;
+                cout<<endl;
+                tree.keyDelete(dValue);
+            case 0:
+                cout << "Exiting the program.\n";
+                break;
+            default:
+                cout << "Invalid choice. Please try again.\n";
+        }
+    } while (choice != 0);
+
+
     return 0;
 }
