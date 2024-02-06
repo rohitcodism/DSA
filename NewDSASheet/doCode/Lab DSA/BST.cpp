@@ -181,7 +181,7 @@ class BinaryTree {
         }
 
         void FastInsert(int value){
-            RInsert(root, value);
+            root = RInsert(root, value);
         }
 
         int Height(Node *p){
@@ -246,6 +246,51 @@ class BinaryTree {
 
         void keyDelete(int value){
             Node *q = Delete(root, value);
+        }
+
+        int findLargestElement(Node *root) {
+            if (root == nullptr) {
+                cout << "Tree is empty." << endl;
+                return -1;
+            }
+            while (root->right != nullptr) {
+                root = root->right;
+            }
+            return root->data;
+        }
+
+        int findSmallestElement(Node *root) {
+            if (root == nullptr) {
+                cout << "Tree is empty." << endl;
+                return -1;
+            }
+            while (root->left != nullptr) {
+                root = root->left;
+            }
+            return root->data;
+        }
+        int countExternalNodes(Node *root) {
+            if (root == nullptr) {
+                return 0;
+            }
+            if (root->left == nullptr && root->right == nullptr) {
+                return 1;
+            }
+            return countExternalNodes(root->left) + countExternalNodes(root->right);
+        }
+
+        int countInternalNodes(Node *root) {
+            if (root == nullptr || (root->left == nullptr && root->right == nullptr)) {
+                return 0;
+            }
+            return 1 + countInternalNodes(root->left) + countInternalNodes(root->right);
+        }
+
+        int countNodes(Node *root) {
+            if (root == nullptr) {
+                return 0;
+            }
+            return 1 + countNodes(root->left) + countNodes(root->right);
         }
 
 };
