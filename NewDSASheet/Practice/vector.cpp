@@ -1,6 +1,12 @@
 #include<bits/stdc++.h>
 using namespace std;
 
+void print_vector(vector<int>vect1){
+    for(auto it = vect1.begin(); it != vect1.end(); it++){
+        cout<<"Element a vect1 : "<<*(it)<<endl;
+    };
+}
+
 void explainVector(){
     vector<int> v;
 
@@ -80,7 +86,69 @@ void explainVector(){
     for(auto it = test_vector.begin(); it != test_vector.end(); it++){
         cout<<"Element a test_vector : "<<*(it)<<endl;
     }
+
+    // Insertion operation in a vector
+    cout<<"------Insertion methods in a vector------"<<endl;
+    vector<int> test_vector2 = {1, 2, 3, 4, 5, 6, 7};
+    test_vector2.insert(test_vector2.begin(), 0); // inserting 0 at the beginning of the vector
+
+    cout<<"After insertion of 0 at the beginning : "<<endl;
+    for(auto it = test_vector2.begin(); it != test_vector2.end(); it++){
+        cout<<"Element a test_vector2 : "<<*(it)<<endl;
+    }
+
+    test_vector2.insert(test_vector2.begin() + 1, 10); // inserting 10 at the 2nd index of the vector
+
+    cout<<endl;
+    cout<<"After insertion of 10 at the 2nd index : "<<endl;
+    for(auto it = test_vector2.begin(); it != test_vector2.end(); it++){
+        cout<<"Element a test_vector2 : "<<*(it)<<endl;
+    }
+
+    // for inserting multiple instances of a element at a time
+    test_vector2.insert(test_vector2.begin() + 2, 3, 100); // inserting 100 three times at the 3rd index of the vector
+
+    cout<<endl;
+    cout<<"After insertion of 100 three times at the 3rd index : "<<endl;
+    print_vector(test_vector2);
+
+    // to know the size of the vector
+    cout<<"Size of the vector : "<<test_vector2.size()<<endl;
+
+    // Pop back operation in a vector
+    cout<<"------Pop back operation in a vector------"<<endl;
+    cout<<"Before pop_back() : "<<endl;
+    print_vector(test_vector2);
+    cout<<endl<<"After pop_back() : "<<endl;
+    print_vector(test_vector2);
+
+    // .swap() operation in a vector
+    cout<<"------Swap operation in a vector------"<<endl;
+    test_vector.swap(test_vector2);
+    cout<<"After swap() test_vector2 is : "<<endl;
+    print_vector(test_vector2);
+    cout<<"After swap() test_vector is : "<<endl;
+    print_vector(test_vector);
+
+    // .clear() operation in a vector
+    cout<<"------Clear operation in a vector------"<<endl;
+    vector<int> clearVector = {1, 2, 3, 4, 5};
+    cout<<"Before clear() : "<<endl;
+    print_vector(clearVector);
+    clearVector.clear();
+    cout<<"After clear() : "<<endl;
+    print_vector(clearVector);
+
+    // .empty() operation in a vector
+    cout<<"------Empty operation in a vector------"<<endl;
+    vector<int> emptyVector = {1, 2, 3, 4, 5};
+    cout<<"Before empty() : "<<endl;
+    cout<<emptyVector.empty()<<endl;
+    emptyVector.clear();
+    cout<<"After empty() : "<<endl;
+    cout<<emptyVector.empty()<<endl;
 }
+
 
 int main(){
     explainVector();
