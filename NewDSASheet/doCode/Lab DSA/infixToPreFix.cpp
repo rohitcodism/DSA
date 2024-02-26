@@ -78,6 +78,8 @@ string infixToPrefix(string infix) {
     // Step 1: Reverse the infix expression
     infix = reverseString(infix);
 
+    cout<<"Reversed Infix : "<<infix<<endl;
+
     // Step 2: Swap opening and closing parentheses and change operator direction
     for(char* ptr = &infix[0]; *ptr != '\0'; ptr++) {
         char& ch = *ptr;
@@ -86,6 +88,8 @@ string infixToPrefix(string infix) {
         else if(ch == ')')
             ch = '(';
     }
+
+    cout<<"After parenthesis swap : "<<infix<<endl;
 
     // Step 3: Apply infix to postfix conversion using a stack
     for(char* ptr = &infix[0]; *ptr != '\0'; ptr++) {
