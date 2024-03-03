@@ -96,6 +96,42 @@ void quickSort(int a[], int low, int high)
     }
 }
 
+void merge(int a[], int low, int mid, int high)
+{
+    int i = low;
+    int j = mid + 1;
+    vector<int> tmp;
+
+    while (i <= mid && j <= high)
+    {
+        if (a[i] <= a[j])
+            tmp.push_back(a[i++]);
+        else
+            tmp.push_back(a[j++]);
+    }
+
+    while (i <= mid)
+        tmp.push_back(a[i++]);
+    while (j <= high)
+        tmp.push_back(a[j++]);
+
+    for (int k = low; k <= high; k++)
+    {
+        a[k] = tmp[k - low];
+    }
+}
+
+void mergeSort(int a[], int low, int high)
+{
+
+    if (low == high)
+        return;
+    int mid = (low + high) / 2;
+    mergeSort(a, low, mid);
+    mergeSort(a, mid + 1, high);
+    merge(a, low, mid, high);
+}
+
 int main()
 {
     int arr[5] = {5, 9, 3, 1, 6};
@@ -107,7 +143,9 @@ int main()
 
     // insertionSort(arr,5);
 
-    quickSort(arr, 0, 5);
+    // quickSort(arr, 0, 5);
+
+    mergeSort(arr, 0, 4);
 
     display(arr, 5);
 }
