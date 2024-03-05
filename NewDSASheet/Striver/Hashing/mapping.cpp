@@ -15,7 +15,7 @@ int main(){
     }
     cout<<endl;
 
-    map<int, int> mpp;
+    unordered_map<int, int> mpp;
 
     for(int i = 0; i < n; i++){
         mpp[arr[i]]++;
@@ -40,6 +40,33 @@ int main(){
     // for(auto it : mpp){
     //     cout<<"The frequency of "<<it.first<<" is "<<it.second<<endl;
     // }
+
+    // string Hashing
+    string s = "hello world";
+
+    map<char, int> mpp1;
+
+    for(char c : s){
+        mpp1[c]++;
+    }
+
+    // cout<<"The frequency of each character is: "<<endl;
+    // for(auto it : mpp1){
+    //     cout<<"The frequency of "<<it.first<<" is "<<it.second<<endl;
+    // }
+
+    cout<<"Enter the number of queries: ";
+    cin>>q;
+    cout<<endl;
+    while(q--){
+        char c;
+        cout<<"Enter the character to be searched: ";
+        cin>>c;
+        cout<<endl;
+
+        cout<<"The character "<<c<<" is present "<<mpp1[c]<<" times."<<endl;
+        cout<<endl;
+    }
 
     return 0;
 }
