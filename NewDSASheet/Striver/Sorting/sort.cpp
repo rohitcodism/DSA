@@ -62,11 +62,18 @@ void insertionSort(int a[], int n)
     }
 }
 
+int pass = 0;
 int partition(int a[], int low, int high)
 {
+    cout<<"----------Pass "<<pass<<" ---------------"<<endl;
     int pivot = a[low];
     int i = low;
     int j = high;
+
+    cout<<"Before Sorting : ";
+    cout<<"Pivot : "<<pivot<<endl;
+    cout<<"The array is : ";
+    display(a,high+1);
 
     while (i < j)
     {
@@ -83,6 +90,12 @@ int partition(int a[], int low, int high)
     }
     swap(a[low], a[j]);
 
+    cout<<"After Sorting : ";
+    cout<<"Pivot : "<<pivot<<endl;
+    cout<<"The array is : ";
+    display(a,high+1);
+    pass++;
+
     return j;
 }
 
@@ -96,11 +109,17 @@ void quickSort(int a[], int low, int high)
     }
 }
 
+int mergePass = 0;
+
 void merge(int a[], int low, int mid, int high)
 {
     int i = low;
     int j = mid + 1;
     vector<int> tmp;
+
+    cout<<"------------Pass "<<mergePass<<" --------------"<<endl;
+    cout<<"Before Sorting : ";
+    display(a,high+1);
 
     while (i <= mid && j <= high)
     {
@@ -119,6 +138,9 @@ void merge(int a[], int low, int mid, int high)
     {
         a[k] = tmp[k - low];
     }
+
+    cout<<"After Sorting : ";
+    display(a,high+1);
 }
 
 void mergeSort(int a[], int low, int high)
@@ -134,7 +156,7 @@ void mergeSort(int a[], int low, int high)
 
 int main()
 {
-    int arr[5] = {5, 9, 3, 1, 6};
+    int arr[5] = {3,7,2,1,4};
     // selectionSort(arr,5);
 
     display(arr, 5);
