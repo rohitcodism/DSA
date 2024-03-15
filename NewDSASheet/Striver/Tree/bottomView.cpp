@@ -2,17 +2,15 @@
 #include<Tree.h>
 using namespace std;
 
-vector<int>topView(treeNode* root){
-
-    vector<int> res;
+vector<int>bottomView(treeNode* root){
 
     int vert = 0;
 
-    queue<pair<treeNode*, int>> Q;
+    vector<int>res;
 
-    map<int ,int> msp;
+    queue<pair<treeNode*,int>>Q;
 
-    if(!root) return res;
+    map<int, int> msp;
 
     Q.push({root, vert});
 
@@ -24,13 +22,16 @@ vector<int>topView(treeNode* root){
 
         int line = it.second;
 
-        if(msp.find(line) == msp.end()) msp[line] = node->data;
+        // if(msp.find(vert) != msp.end()) msp[vert] = node->data;
+
+        msp[line] = node->data;
 
         if(node->left)
             Q.push({node->left, vert-1});
         if(node->right)
             Q.push({node->right, vert+1});
     }
+
     for(auto it : msp){
         res.push_back(it.second);
     }
