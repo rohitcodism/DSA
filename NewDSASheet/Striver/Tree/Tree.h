@@ -47,7 +47,7 @@ public:
 
     treeNode *getRoot()
     {
-        return root;
+        return this->root;
     }
 
     void display(treeNode *root)
@@ -58,18 +58,13 @@ public:
             cout << root->data << " ";
             display(root->right);
         }
-        else
-        {
-            cout << "NULL: There is no root!!! " << endl;
-        }
     }
 
     void insert(treeNode *root, int data)
     {
         if (root == nullptr)
         {
-            root = new treeNode(data);
-            display(root);
+            this->root = new treeNode(data);
             return;
         }
         if (root->data > data)
@@ -94,7 +89,6 @@ public:
                 insert(root->right, data);
             }
         }
-        display(root);
     }
 };
 

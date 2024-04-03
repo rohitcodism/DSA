@@ -43,7 +43,7 @@ public:
 
     treeNode *getRoot()
     {
-        return root;
+        return this->root;
     }
 
     void display(treeNode *root)
@@ -54,18 +54,13 @@ public:
             cout << root->data << " ";
             display(root->right);
         }
-        else
-        {
-            cout << "NULL: There is no root!!! " << endl;
-        }
     }
 
     void insert(treeNode *root, int data)
     {
         if (root == nullptr)
         {
-            root = new treeNode(data);
-            display(root);
+            this->root = new treeNode(data);
             return;
         }
         if (root->data > data)
@@ -90,7 +85,6 @@ public:
                 insert(root->right, data);
             }
         }
-        display(root);
     }
 
     void displayTraversalVector(vector<int> v)
@@ -287,8 +281,9 @@ int main()
         cout << "1. Insert\n";
         cout << "2. Inorder Traversal\n";
         cout << "3. Postorder Traversal\n";
-        cout << "4.All at once traversal\n";
+        cout << "4. All at once traversal\n";
         cout << "5. Display\n";
+        cout << "6. Print the root\n";
         cout << "0. Exit\n";
         cout << "Enter your choice: ";
         cin >> choice;
@@ -319,6 +314,10 @@ int main()
             cout << "Display: ";
             tree.display(tree.getRoot());
             cout << endl;
+            break;
+        case 6:
+            cout<<"The root of this tree is : ";
+            cout<<tree.getRoot()->data<<endl;
             break;
         default:
             cout << "Invalid choice. Please try again.\n";
