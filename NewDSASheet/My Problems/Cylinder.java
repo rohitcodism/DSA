@@ -1,17 +1,17 @@
-public class Cylinder {
+class Cylinder {
     private double radius;
     private double height;
 
-    public Cylinder(double radius, double height) {
+    Cylinder(double radius, double height) {
         this.radius = radius;
         this.height = height;
     }
 
-    public double calculateSurfaceArea() {
+    double calculateSurfaceArea() {
         return 2 * Math.PI * radius * (radius + height);
     }
 
-    public double calculateCircumference() {
+    double calculateCircumference() {
         return 2 * Math.PI * radius;
     }
 
