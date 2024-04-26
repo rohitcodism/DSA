@@ -1,4 +1,4 @@
-class Cylinder {
+public class Cylinder {
     private double radius;
     private double height;
 
