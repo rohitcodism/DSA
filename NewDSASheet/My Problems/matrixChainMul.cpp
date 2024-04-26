@@ -56,9 +56,11 @@ int MatrixChainOrder(int p[], int n, int** m, int** s) {
             for(int k = i; k<j-1;k++){
                 q = m[i][k] + m[k+1][j] + (p[i-1]*p[k]*p[j]);
                 if(q<min){
-                    
+                    min = q;
+                    s[i][j] = k;
                 }
             }
+            m[i][j] = min;
         }
     }
 
