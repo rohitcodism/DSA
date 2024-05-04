@@ -1,5 +1,5 @@
 #include<bits/stdc++.h>
-#include<Tree.h>
+#include "Tree.h"
 using namespace std;
 
 string serialize(treeNode* root){
@@ -16,7 +16,7 @@ string serialize(treeNode* root){
         q.pop();
 
         if(!newNode){
-            s.append("#");
+            s.append("#, ");
         }
         else{
             s.append(to_string(newNode->data)+',');
@@ -27,7 +27,7 @@ string serialize(treeNode* root){
         }
     }
 
-    
+    return s;
 }
 
 treeNode* deSerialize(string data){
@@ -41,6 +41,8 @@ treeNode* deSerialize(string data){
     string str;
 
     getline(s, str, ',');
+
+    cout<<stoi(str)<<endl;
 
     treeNode* root = new treeNode(stoi(str));
 
@@ -80,4 +82,25 @@ treeNode* deSerialize(string data){
 
     return root;
 
+}
+
+int main() {
+    Tree tree;
+
+    tree.insert(tree.getRoot(), 10);
+    tree.insert(tree.getRoot(), 5);
+    tree.insert(tree.getRoot(), 3);
+    tree.insert(tree.getRoot(), 15);
+    tree.insert(tree.getRoot(), 20);
+
+    tree.display(tree.getRoot());
+
+    cout<<endl;
+
+    string serializedTree = serialize(tree.getRoot());
+
+    cout<<"The serialized tree is : "<<serializedTree<<endl;
+
+    cout<<"The deserialized version of this tree is : "<<endl;
+    tree.display(deSerialize(serializedTree));
 }
