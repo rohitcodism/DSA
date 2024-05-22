@@ -38,31 +38,28 @@ int Prims(int V, vector<vector<int>> adjacency[]){
 }
 
 int main() {
+
+    ifstream infile("prims.txt");
+
     int V; // number of vertices
-    cout << "Enter the number of vertices: ";
-    cin >> V;
+    infile >> V;
 
     vector<vector<int>> adjacency[V]; // adjacency list representation of graph
 
     cout << "Enter the number of edges: ";
     int E;
-    cin >> E;
+    infile >> E;
 
     cout << "Enter the edges and weights (source, destination, weight):" << endl;
     for (int i = 0; i < E; i++) {
         int src, dest, weight;
-        cout << "Enter source for edge " << i+1 << ": ";
-        cin >> src;
-        cout << "Enter destination for edge " << i+1 << ": ";
-        cin >> dest;
-        cout << "Enter weight for edge " << i+1 << ": ";
-        cin >> weight;
-
-        cout<<endl;
+        infile >> src >> dest >> weight;
 
         adjacency[src].push_back({dest, weight});
         adjacency[dest].push_back({src, weight});
     }
+
+    infile.close();
 
     cout << "Adjacency List:" << endl;
     for (int i = 0; i < V; i++) {

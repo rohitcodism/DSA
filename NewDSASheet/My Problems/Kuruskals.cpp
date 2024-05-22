@@ -92,50 +92,35 @@ int main()
 {
     int V; // number of vertices
 
-    cout << "Enter the number of vertices (positive integer): ";
-    if (!(cin >> V) || V <= 0)
+    ifstream infile("kuruskal.txt");
+
+    infile >> V;
+    
+    if (V <= 0)
     {
-        cerr << "Invalid input! Please enter a positive integer." << endl;
+        cerr << "Invalid input! Please enter a positive integer for the number of vertices." << endl;
         return 1;
     }
 
     vector<pair<int, int>> adjacency[V]; // adjacency list representation
 
     int E; // number of edges
-    cout << "Enter the number of edges (positive integer): ";
-    if (!(cin >> E) || E <= 0)
+    infile >> E;
+    if (E <= 0)
     {
-        cerr << "Invalid input! Please enter a positive integer." << endl;
+        cerr << "Invalid input! Please enter a positive integer for the number of edges." << endl;
         return 1;
     }
-
-    cout << "Enter the edges and weights (source, destination, weight):" << endl;
     for (int i = 0; i < E; i++)
     {
         int src, dest, weight;
-        cout << "Enter source for edge " << i + 1 << ": ";
-        if (!(cin >> src))
-        {
-            cerr << "Invalid input! Please enter an integer." << endl;
-            return 1;
-        }
-        cout << "Enter destination for edge " << i + 1 << ": ";
-        if (!(cin >> dest))
-        {
-            cerr << "Invalid input! Please enter an integer." << endl;
-            return 1;
-        }
-        cout << "Enter weight for edge " << i + 1 << ": ";
-        if (!(cin >> weight))
-        {
-            cerr << "Invalid input! Please enter an integer." << endl;
-            return 1;
-        }
-        cout << endl;
+        infile >> src >> dest >> weight;
 
         adjacency[src].push_back({dest, weight});
         adjacency[dest].push_back({src, weight});
     }
+
+    infile.close();
 
     // Print adjacency list
     cout << "Adjacency List:" << endl;
