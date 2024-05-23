@@ -3,5 +3,9 @@
         ".env*": "dotenv",
         "iostream": "cpp",
         "ostream": "cpp"
-    }
+    },
+    "cSpell.words": [
+        "Djikstras",
+        "Kuruskals"
+    ]
 }
