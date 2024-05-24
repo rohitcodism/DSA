@@ -2,6 +2,14 @@
 #include <vector>
 using namespace std;
 
+// Function to print the current state of the array
+void printArray(const vector<int>& arr) {
+    for (int val : arr) {
+        cout << val << " ";
+    }
+    cout << endl;
+}
+
 // Function to merge two halves into a sorted array
 void merge(vector<int>& arr, int left, int mid, int right) {
     int n1 = mid - left + 1;  // Size of the left half
@@ -52,6 +60,9 @@ void merge(vector<int>& arr, int left, int mid, int right) {
 // Function to implement merge sort
 void mergeSort(vector<int>& arr, int left, int right) {
     if (left < right) {
+        cout << "Before sorting: ";
+        printArray(arr);
+
         int mid = left + (right - left) / 2;  // Find the middle point
 
         // Recursively sort the first and second halves
@@ -60,6 +71,9 @@ void mergeSort(vector<int>& arr, int left, int right) {
 
         // Merge the sorted halves
         merge(arr, left, mid, right);
+
+        cout << "After sorting from " << left << " to " << right << ": ";
+        printArray(arr);
     }
 }
 
@@ -74,15 +88,15 @@ int main() {
         cin >> arr[i];
     }
 
+    cout << "Initial array: ";
+    printArray(arr);
+
     // Call the mergeSort function
     mergeSort(arr, 0, n - 1);
 
     // Print the sorted array
     cout << "Sorted array: ";
-    for (int i = 0; i < n; i++) {
-        cout << arr[i] << " ";
-    }
-    cout << endl;
+    printArray(arr);
 
     return 0;
 }
