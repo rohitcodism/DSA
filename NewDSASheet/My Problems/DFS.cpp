@@ -1,55 +1,83 @@
-#include <bits/stdc++.h>
+#include <iostream>
+#include <fstream>
+
 using namespace std;
 
-vector<int> DFS(int node, vector<int> adj[], int V, int visited[], vector<int>& dfs)
+int* DFS(int node, int** adj, int V, int visited[], int dfs[], int& index)
 {
-
     visited[node] = 1;
+    dfs[index++] = node;
 
-    dfs.push_back(node);
-
-    for (auto it : adj[node])
+    for (int i = 0; i < V; i++)
     {
-        if (!visited[it])
+        if (adj[node][i] == 1 && !visited[i])
         {
-            DFS(it, adj, V, visited, dfs);
+            DFS(i, adj, V, visited, dfs, index);
         }
     }
 
     return dfs;
 }
 
-vector<int> Solve(int S, vector<int> adj[], int V)
+int* Solve(int S, int** adj, int V)
 {
-    int visited[V] = {0};
+    int* visited = new int[V];
+    for (int i = 0; i < V; ++i)
+    {
+        visited[i] = 0;
+    }
 
-    vector<int> dfs;
+    int* dfs = new int[V];
+    int index = 0;
 
-    DFS(S, adj, V, visited, dfs);
+    DFS(S, adj, V, visited, dfs, index);
 
+    delete[] visited;
     return dfs;
 }
 
-int main() {
+int main()
+{
     int V, E;
 
     ifstream infile("BFS.txt");
 
+    if (!infile)
+    {
+        cerr << "Error: Unable to open input file." << endl;
+        return 1;
+    }
+
     infile >> V >> E;
 
-    vector<int> adj[V];
-    for (int i = 0; i < E; i++) {
+    int** adj = new int*[V];
+    for (int i = 0; i < V; i++)
+    {
+        adj[i] = new int[V];
+        for (int j = 0; j < V; j++)
+        {
+            adj[i][j] = 0;
+        }
+    }
+
+    for (int i = 0; i < E; i++)
+    {
         int u, v;
         infile >> u >> v;
-        adj[u].push_back(v);
-        adj[v].push_back(u);
+        adj[u][v] = 1;
+        adj[v][u] = 1; // Assuming undirected graph
     }
 
     cout << "Adjacency List:" << endl;
-    for (int i = 0; i < V; i++) {
+    for (int i = 0; i < V; i++)
+    {
         cout << i << ": ";
-        for (int j : adj[i]) {
-            cout << j << " ";
+        for (int j = 0; j < V; j++)
+        {
+            if (adj[i][j] == 1)
+            {
+                cout << j << " ";
+            }
         }
         cout << endl;
     }
@@ -59,13 +87,21 @@ int main() {
 
     infile.close();
 
-    vector<int> result = Solve(S, adj, V);
+    int* result = Solve(S, adj, V);
 
     cout << "DFS traversal: ";
-    for (int node : result) {
-        cout << node << " ";
+    for (int i = 0; i < V; i++)
+    {
+        cout << result[i] << " ";
     }
     cout << endl;
+
+    for (int i = 0; i < V; i++)
+    {
+        delete[] adj[i];
+    }
+    delete[] adj;
+    delete[] result;
 
     return 0;
 }
