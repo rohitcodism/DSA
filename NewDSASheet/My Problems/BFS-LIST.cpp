@@ -63,19 +63,20 @@ public:
     }
 };
 
-// Function to perform BFS
-void BFS(int node, int** adj, int V, int* visited) {
+// Function to perform BFS traversal
+void BFS(int start, int** adjList, int* adjListSize, int V, int* visited) {
     Queue q(V);
-    q.enqueue(node);
-    visited[node] = 1;
+    q.enqueue(start);
+    visited[start] = 1;
 
     while (!q.isEmpty()) {
         int u = q.getFront();
         q.dequeue();
         cout << u << " ";
 
-        for (int v = 0; v < V; v++) {
-            if (adj[u][v] && !visited[v]) {
+        for (int i = 0; i < adjListSize[u]; ++i) {
+            int v = adjList[u][i];
+            if (!visited[v]) {
                 q.enqueue(v);
                 visited[v] = 1;
             }
@@ -84,51 +85,54 @@ void BFS(int node, int** adj, int V, int* visited) {
 }
 
 int main() {
-    int V;
+    int V, E, isDirected;
 
-    ifstream infile("BFS2.txt");
+    ifstream infile("bfsList.txt");
     if (!infile) {
         cout << "Error: Unable to open input file." << endl;
         return 1;
     }
 
-    infile >> V;
+    infile >> V >> E;
+    infile >> isDirected;
 
-    // Dynamic allocation of adjacency matrix and visited array
-    int** adj = new int*[V];
-    for (int i = 0; i < V; i++) {
-        adj[i] = new int[V];
-    }
+    // Dynamic allocation of adjacency list and visited array
+    int** adjList = new int*[V];
+    int* adjListSize = new int[V]();
     int* visited = new int[V]();
 
-    for (int i = 0; i < V; i++) {
-        for (int j = 0; j < V; j++) {
-            infile >> adj[i][j];
+    for (int i = 0; i < V; ++i) {
+        adjList[i] = new int[V]; // Max V edges per vertex
+        for (int j = 0; j < V; ++j) {
+            adjList[i][j] = 0;
         }
     }
 
-    cout << "Adjacency Matrix:" << endl;
-    for (int i = 0; i < V; i++) {
-        for (int j = 0; j < V; j++) {
-            cout << adj[i][j] << " ";
+    int u, v;
+    for (int i = 0; i < E; ++i) {
+        infile >> u >> v;
+        adjList[u][adjListSize[u]++] = v;
+        if (!isDirected) {
+            adjList[v][adjListSize[v]++] = u;
         }
-        cout << endl;
     }
-
-    int S;
-    infile >> S;
 
     infile.close();
 
-    cout << "BFS traversal: ";
-    BFS(S, adj, V, visited);
+    int S;
+    cout << "Enter the starting vertex: ";
+    cin >> S;
+
+    cout << "BFS traversal starting from vertex " << S << ": ";
+    BFS(S, adjList, adjListSize, V, visited);
     cout << endl;
 
     // Free dynamically allocated memory
-    for (int i = 0; i < V; i++) {
-        delete[] adj[i];
+    for (int i = 0; i < V; ++i) {
+        delete[] adjList[i];
     }
-    delete[] adj;
+    delete[] adjList;
+    delete[] adjListSize;
     delete[] visited;
 
     return 0;

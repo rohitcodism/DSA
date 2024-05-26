@@ -2,66 +2,9 @@
 
 using namespace std;
 
-bool isCorrectSolution(int **board, int N)
-{
-    // Check each row and column for more than one queen
-    for (int i = 0; i < N; i++)
-    {
-        int rowCount = 0;
-        int colCount = 0;
-        for (int j = 0; j < N; j++)
-        {
-            if (board[i][j] == 1)
-                rowCount++;
-            if (board[j][i] == 1)
-                colCount++;
-        }
-        if (rowCount > 1 || colCount > 1)
-            return false;
-    }
-
-    // Check diagonals for more than one queen
-    for (int i = 0; i < N; i++)
-    {
-        for (int j = 0; j < N; j++)
-        {
-            if (board[i][j] == 1)
-            {
-                // Check upper left diagonal
-                for (int x = i - 1, y = j - 1; x >= 0 && y >= 0; x--, y--)
-                {
-                    if (board[x][y] == 1)
-                        return false;
-                }
-                // Check upper right diagonal
-                for (int x = i - 1, y = j + 1; x >= 0 && y < N; x--, y++)
-                {
-                    if (board[x][y] == 1)
-                        return false;
-                }
-                // Check lower left diagonal
-                for (int x = i + 1, y = j - 1; x < N && y >= 0; x++, y--)
-                {
-                    if (board[x][y] == 1)
-                        return false;
-                }
-                // Check lower right diagonal
-                for (int x = i + 1, y = j + 1; x < N && y < N; x++, y++)
-                {
-                    if (board[x][y] == 1)
-                        return false;
-                }
-            }
-        }
-    }
-
-    // If all checks are passed, the solution is correct
-    return true;
-}
-
 bool isSafe(int row, int col, int *cols, int *diag1, int *diag2, int N)
 {
-    return !cols[col] && !diag1[col + row] && !diag2[col - row + N - 1];
+    return !cols[col] && !diag1[col + row] && !diag2[(col - row) + (N - 1)];
 }
 
 void printSolution(int **board, int N)
@@ -81,7 +24,7 @@ void printSolution(int **board, int N)
 
 void solveNQueen(int **board, int col, int *cols, int *diag1, int *diag2, int N, int &solutionCount)
 {
-    if (col == N && isCorrectSolution(board, N))
+    if (col == N)
     {
         printSolution(board, N);
         solutionCount++;

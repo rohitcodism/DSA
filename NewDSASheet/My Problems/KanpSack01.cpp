@@ -1,10 +1,10 @@
-#include <bits/stdc++.h>
+#include <iostream>
 using namespace std;
 
 // Function to solve the 0/1 Knapsack problem
-int knapsack(int W, vector<int> &wt, vector<int> &val, int n) {
+int knapsack(int W, int* wt, int* val, int n) {
     // Create a DP array to store the maximum value for each weight
-    vector<int> dp(W + 1, 0);
+    int* dp = new int[W+1]();
 
     // Iterate through all items
     for (int i = 0; i < n; i++) {
@@ -28,7 +28,8 @@ int main() {
     cout << "Enter the maximum weight capacity of the knapsack: ";
     cin >> W;
     
-    vector<int> wt(n), val(n);
+    int* wt = new int[n];
+    int* val = new int[n];
     
     // Read the weights and values of the items
     cout << "Enter the weights of the items: ";
