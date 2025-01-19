@@ -43,3 +43,13 @@ class Test2{
         System.out.println(y);
     }
 }
+
+//*Output of this code */
+
+/* 
+    Test 2 is initiated.
+    Test 1 is initiated
+    Test1@123772c4
+    Test 2 is initiated.
+    Test2@2d363fb3
+ */
